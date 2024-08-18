@@ -42,14 +42,17 @@ async function run() {
           query.productName = { $regex: search, $options: "i" };
         }
   
-        if (brand) {
-          query.brand = brand;
-        }
-        if (category) {
-          query.category = category;
-        }
-  
        
+  
+        if (priceMin || priceMax) {
+          query.price = {};
+          if (priceMin) {
+            query.price.$gte = parseFloat(priceMin);
+          }
+          if (priceMax) {
+            query.price.$lte = parseFloat(priceMax);
+          }
+        }
   
         let sortOption = {};
         if (sortBy === "priceLowToHigh") {
