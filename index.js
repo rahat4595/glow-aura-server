@@ -49,17 +49,16 @@ async function run() {
           query.category = category;
         }
   
-        if (priceMin || priceMax) {
-          query.price = {};
-          if (priceMin) {
-            query.price.$gte = parseFloat(priceMin);
-          }
-          if (priceMax) {
-            query.price.$lte = parseFloat(priceMax);
-          }
-        }
-  
        
+  
+        let sortOption = {};
+        if (sortBy === "priceLowToHigh") {
+          sortOption.price = 1;
+        } else if (sortBy === "priceHighToLow") {
+          sortOption.price = -1;
+        } else if (sortBy === "newestFirst") {
+          sortOption.createdAt = -1;
+        }
   
         const result = await productsCollection.find(query)
           .sort(sortOption)
