@@ -42,7 +42,12 @@ async function run() {
           query.productName = { $regex: search, $options: "i" };
         }
   
-       
+        if (brand) {
+          query.brand = brand;
+        }
+        if (category) {
+          query.category = category;
+        }
   
         if (priceMin || priceMax) {
           query.price = {};
@@ -63,10 +68,7 @@ async function run() {
           sortOption.createdAt = -1;
         }
   
-        const result = await productsCollection.find(query)
-          .sort(sortOption)
-          .toArray();
-        res.send(result);
+      
       });
 
 
