@@ -29,10 +29,7 @@ async function run() {
     const productsCollection = client.db("glowDb").collection("products");
 
 
-    //  app.get("/allProducts", async (req, res) => {
-    //   const result = await productsCollection.find().toArray();
-    //   res.send(result);
-    // });
+    
 
     app.get("/allProducts", async (req, res) => {
         const { brand, category, sortBy, priceMin, priceMax, search } = req.query;
